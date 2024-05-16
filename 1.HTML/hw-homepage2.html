@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>정여원의 홈페이지</title>
+    <style>
+        .quiz1 {
+            border: 2px solid blue;
+        }
+        .quiz2 {
+            border: 2px solid green;
+        }
+        .total {
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <header align="center"><h1>정여원의 홈페이지</h1></header>
+    <nav>
+        <table border="1" width="100%">
+            <tr>
+                <th width="10%"><a href="hw-homepage1.html">소개</a></th>
+                <th width="10%"><a href="hw-homepage2.html">퀴즈</a></th>
+                <th width="10%"><a href="hw-homepage3.html">댓글 남기기</a></th>
+            </tr>
+        </table>
+        <br>
+    </nav>
+    <main>
+        <section>
+            <h3>정여원에 대해 맞춰보세요.</h3>
+        </section>
+        <section class="total">
+            <p class="quiz1">정여원의 MBTI는?
+            <select>
+                <option>ISTJ</option>
+                <option>ISFJ</option>
+                <option>INFJ</option>
+                <option>INTJ</option>
+                <option>ISTP</option>
+                <option>ISFP</option>
+                <option>INFP</option>
+                <option>INTP</option>
+                <option>ESTP</option>
+                <option>ESFP</option>
+                <option>ENFP</option>
+                <option>ENTP</option>
+                <option>ESTJ</option>
+                <option>ESFJ</option>
+                <option>ENFJ</option>
+                <option>ENTJ</option>
+            </select></p>
+
+            <p class="quiz2">정여원이 점심을 먹은 식당은?<br>
+            <input type="radio" name="식당" value="통큰"> 통큰 장모님 밥상
+            <input type="radio" name="식당" value="맘터"> 맘스터치
+            <input type="radio" name="식당" value="서브"> 서브웨이
+            <input type="radio" name="식당" value="종로"> 종로김밥
+            <input type="radio" name="식당" value="기화"> 기화만사성
+            </p>
+
+            <p class="quiz1">정여원이 좋아하는 동물은?(복수 선택 가능)<br>
+            <input type="checkbox" name="동물" value="고양이"> 고양이
+            <input type="checkbox" name="동물" value="강아지"> 강아지
+            <input type="checkbox" name="동물" value="호랑이"> 호랑이
+            <input type="checkbox" name="동물" value="다람쥐"> 다람쥐
+            <input type="checkbox" name="동물" value="판다"> 판다
+            </p>
+
+            <p><br>진행 상황
+            <progress value="40" max="100"></progress> 40%
+            </p>
+        </section>
+    </main>
+</body>
+</html>
