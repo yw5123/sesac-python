@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            color: white;
+            position: relative;
+            overflow: hidden scroll;
+        }
+        .div1 {background-color: orange; z-index: 40}
+        .div2 {background-color: red; bottom:50px; z-index: 10}
+        .div3 {background-color: blue; bottom:100px; z-index: 20}
+        .div4 {background-color: yellow; bottom:150px; z-index: 30}
+    </style>
+</head>
+<body>
+    <h1>Z-index를 통한 레이어 순서 변경</h1>
+    <div class="div1"><p>ORANGE 색상으로 보여지는 박스 글씨를 길게 써서 초과하게 해봅시다</p></div>
+    <div class="div2">RED</div>
+    <div class="div3">BLUE</div>
+    <div class="div4">YELLOW</div>
+</body>
+</html>

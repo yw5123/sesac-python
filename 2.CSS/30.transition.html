@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>다양한 CSS 효과 (Transition)</title>
+    <style>
+        .squire {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transition-property: with, height;
+            transition-duration: 1.0s;
+            transition-timing-function: ease;
+        }
+        .squire:hover {
+            width: 150px;
+            height: 150px;
+        }
+        .button {
+            color: black;
+            transition-property: color;
+            transition-duration: 2.0s;
+            transition-timing-function: ease-out;
+        }
+        .button:hover {
+            color: red;
+        }
+        .image {
+            width: 200px;
+            height: 200px;
+            transition-property: transform;
+            transition-duration: 5.0s;
+            transition-timing-function: ease-in-out;
+        }
+        .image:hover {
+            transform: rotate(180deg);
+        }
+        .gradient {
+            background-image: linear-gradient(to right, #ff0000, #00ff00);
+            transition-property: background-image;
+            transition-duration: 3.0s;
+            transition-timing-function: ease-in-out;
+        }
+        .gradient:hover {
+            background-image: linear-gradient(to right, #00ff00, #ff0000);
+        }
+    </style>
+</head>
+<body>
+    <div class="squire"></div>
+    <br>
+    <button class="button">Hover me</button>
+    <br>
+    <img src="../1.HTML/images/cat1.jpg" class="image">
+    <br>
+    <div class="gradient">마우스를 올리면 색이 변한다</div>
+</body>
+</html>
