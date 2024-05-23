@@ -34,10 +34,48 @@ print('섞인 리스트: ', random_list(elements))
 print('섞인 리스트: ', random_list(numbers))
 
 
+charU = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+charL = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
 # 미션5. 랜덤 문자열 생성 (영문 대문자 6자리)
+def random_upper6():
+    # upper_str = ""
+    # for i in range(6):
+    #     upper_str += random.choice(charU)
+    # return upper_str
+    return ''.join(random.choices(charU, k=6))
+
+print('랜덤 문자열(영문 대문자 6자리): ', random_upper6())
+
 
 # 미션6. 랜덤 초이스에서 가중치 고려
+# elements = ['apple', 'banana', 'cherry', 'grape', 'pineapple']    # 위에 선언되어 있음
+weight1 = [5, 4, 3, 2, 1]
+
+def choose_random_weight(elements):
+    return random.choices(elements, weight1)
+
+print("가중치 랜덤: ", choose_random_weight(elements))
+
 
 # 미션7. 랜덤 비밀번호 생성 (대소문자, 숫자 포함 8자리)
+def rand_pwd():
+    pwd = ""
+    for i in range(8):
+        ran_3 = random.randint(1,3)
+        if ran_3 == 1:
+            pwd += random.choice(charU)
+        elif ran_3 == 2:
+            pwd += random.choice(charL)
+        else:
+            pwd += str(random.randint(0,9))
+    return pwd
+
+print("랜덤 비밀번호: ", rand_pwd())
+
 
 # 미션8. 강력한 비밀번호 생성 (대문자, 소문자, 숫자를 각각 최소 1개 이상)
+def strong_pwd():
+    return
+
+print("강력한 비밀번호: ", strong_pwd())

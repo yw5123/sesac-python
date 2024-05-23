@@ -18,7 +18,12 @@ nested_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 # [flattened_list.extend(lst) for lst in nested_list]
 
 # flattened_list = [lst[i] for lst in nested_list for i in range(len(lst))] 
-flattened_list = [lst for nlst in nested_list for lst in nlst] 
+
+# for nlst in nested_list:
+#     for lst in nlst:
+#         print(lst)
+
+flattened_list = [lst for nlst in nested_list for lst in nlst]  # for lst in nlst 가 (조건문)에 해당하는 건가?
 print("#5: ", flattened_list)
 # 출력: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
