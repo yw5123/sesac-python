@@ -1,3 +1,6 @@
+# 미션2. 게임 스코어 저장하기
+# 점수와 이름 입력받기 -> 다양한 모드(score, high, history)에 따라 기능 구현
+
 score_lst = []
 
 class InputError(Exception):
