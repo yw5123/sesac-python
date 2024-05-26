@@ -1,7 +1,6 @@
 # 미션3. 달력 만들기 (텍스트로 년/월 입력받아 출력)
 
 month_lst = ['January','February','March','April','May','June','July','August','September','October','November','December']
-day_lst = ['Monday','Tuesday','Wednesday']
 month_day = [31,28,31,30,31,30,31,31,30,31,30,31]
 
 class InputError(Exception):
