@@ -2,10 +2,38 @@
 
 month_lst = ['January','February','March','April','May','June','July','August','September','October','November','December']
 day_lst = ['Monday','Tuesday','Wednesday']
-month_day = [31,28,31,30,31,30,31,31,30,31,30,31]
 
 class InputError(Exception):
     pass
+
+def get_month_day(year, month):
+    if month == 1:
+        return 31
+    elif month == 2:
+        if year%4==0 and year%100!=0 or year%400==0:
+            return 29
+        else:
+            return 28
+    elif month == 3:
+        return 31
+    elif month == 4:
+        return 30
+    elif month == 5:
+        return 31
+    elif month == 6:
+        return 30
+    elif month == 7:
+        return 31
+    elif month == 8:
+        return 31
+    elif month == 9:
+        return 30
+    elif month == 10:
+        return 31
+    elif month == 11:
+        return 30
+    elif month == 12:
+        return 31
 
 def get_cal():
     try:
@@ -22,28 +50,20 @@ def get_cal():
     return year, month
 
 def cal_cal(year, month):
-    lyear = False
     cal_days = (year-1)*365 + (year-1)/4 - (year-1)/100 + (year-1)/400
-    for i in range(month-1):
-        cal_days += month_day[i]
-    if year%4==0 and year%100!=0 or year%400==0:
-        lyear = True
-        if month > 2:
-            cal_days += 1
+    for _ in range(1, month-1):
+        cal_days += get_month_day(year, month)
     cal_days += 1
     find_1day = int(cal_days % 7)    # 1일의 요일 구하기
     print(f'       [ {month_lst[month-1]} {year} ]')
     print("SUN MON TUE WED THU FRI SAT")
 
-    show_cal(find_1day, month, lyear)
+    show_cal(find_1day, month, year)
             
 
-def show_cal(day1, month, lyear):
-    if lyear == True:
-        month_day[1] = 29
-
+def show_cal(day1, month, year):
     print('   '*day1+' '*day1, end="")
-    for i in range(month_day[month-1]):
+    for i in range(get_month_day(year, month)):
         if i < 9:
             print(f' {i+1}  ', end="")
         else:
@@ -51,9 +71,6 @@ def show_cal(day1, month, lyear):
 
         if (i+1+day1)%7 == 0:
             print()
-
-    if lyear == True:
-        month_day[1] = 28
 
 
 while(True):

@@ -61,7 +61,7 @@ print("가중치 랜덤: ", choose_random_weight(elements))
 # 미션7. 랜덤 비밀번호 생성 (대소문자, 숫자 포함 8자리)
 def rand_pwd():
     pwd = ""
-    for i in range(8):
+    for _ in range(8):
         ran_3 = random.randint(1,3)
         if ran_3 == 1:
             pwd += random.choice(charU)
@@ -76,6 +76,21 @@ print("랜덤 비밀번호: ", rand_pwd())
 
 # 미션8. 강력한 비밀번호 생성 (대문자, 소문자, 숫자를 각각 최소 1개 이상)
 def strong_pwd():
-    return
+    pwd = []
+    pwd.append(random.choice(charU))
+    pwd.append(random.choice(charL))
+    pwd.append(str(random.randint(0,9)))
+    # pwd += random.choice(charL)
+    # pwd += str(random.randint(0,9))
+    for _ in range(5):
+        ran_3 = random.randint(1,3)
+        if ran_3 == 1:
+            pwd += random.choice(charU)
+        elif ran_3 == 2:
+            pwd += random.choice(charL)
+        else:
+            pwd += str(random.randint(0,9))
+    random.shuffle(pwd)
+    return ''.join(pwd)
 
 print("강력한 비밀번호: ", strong_pwd())
