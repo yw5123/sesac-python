@@ -1,6 +1,6 @@
 import random
 
-class TypeGenerator:
+class StypeGenerator:
     types = []
 
     def __init__(self):

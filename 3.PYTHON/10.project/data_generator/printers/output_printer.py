@@ -8,6 +8,5 @@ class DataPrinter:
     def print_to_file(self, data, file_name):
         with open(file_name,"w",newline="",encoding="utf-8") as file:
             writer = csv.writer(file)
-            writer.writerow(('Id', 'Name', 'Gender', 'Age', 'Birthdate', 'Address'))
             for d in data:
                 writer.writerow(d)
