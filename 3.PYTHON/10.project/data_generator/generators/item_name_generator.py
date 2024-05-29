@@ -27,7 +27,3 @@ class InameGenerator:
 
         return name, itype, price
     
-
-if __name__ == "__main__":
-    item = InameGenerator()
-    print(item.generate_type())

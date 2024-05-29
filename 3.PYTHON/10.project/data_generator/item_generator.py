@@ -12,10 +12,10 @@ class ItemGenerator:
     def generate_item(self, num):
         self.data.append(('Id','Name','Type','UnitPrice'))
         for _ in range(num):
-            id = self.id_gen.generate_id()
+            iid = self.id_gen.generate_id()
             name, itype, price = self.name_gen.generate_type()
 
-            self.data.append((id, name, itype, price))
+            self.data.append((iid, name, itype, price))
 
 
 # ----- 확인용 코드 -----
