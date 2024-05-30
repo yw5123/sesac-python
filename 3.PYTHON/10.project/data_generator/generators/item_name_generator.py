@@ -13,9 +13,9 @@ class InameGenerator:
                 self.nameprice = file.read().splitlines()
                 
                 for np in self.nameprice:
-                    np_data = np.split(', ')
-                    name = np_data[0]
-                    price = np_data[1]
+                    np_data = np.split(',')
+                    name = np_data[0].strip()
+                    price = np_data[1].strip()
                     self.sub_dict[name] = price
                 self.data[t] = self.sub_dict
             self.sub_dict = {}
