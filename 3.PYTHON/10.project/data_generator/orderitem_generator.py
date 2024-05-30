@@ -11,16 +11,22 @@ class OrderItemGenerator:
     def __init__(self):
         self.id_gen = IdGenerator()
         with open("order.csv",'r',encoding="utf-8") as file:
-            reader = csv.reader(file)
+            reader = csv.DictReader(file)
             for r in reader:
-                self.oid_lst.append(r[0])
+                self.oid_lst.append(r)
+            # reader = csv.reader(file)
+            # for r in reader:
+            #     self.oid_lst.append(r[0])
         with open("item.csv",'r',encoding="utf-8") as file:
-            reader = csv.reader(file)
+            reader = csv.DictReader(file)
             for r in reader:
-                self.iid_lst.append(r[0])
+                self.iid_lst.append(r)
+            # reader = csv.reader(file)
+            # for r in reader:
+            #     self.iid_lst.append(r[0])
         
-        del self.oid_lst[0]
-        del self.iid_lst[0]
+        # del self.oid_lst[0]
+        # del self.iid_lst[0]
 
     def generate_orderitem(self, num):
         self.data.append(('Id','OrderId','ItemId'))
@@ -30,7 +36,8 @@ class OrderItemGenerator:
             o_id = random.choice(self.oid_lst)
             i_id = random.choice(self.iid_lst)
 
-            self.data.append((oiid, o_id, i_id))
+            self.data.append((oiid, o_id['Id'], i_id['Id']))
+            # self.data.append((oiid, o_id, i_id))
 
 
 

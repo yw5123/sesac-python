@@ -56,8 +56,8 @@ def generate():
         g_datas.generate_order(int(data_num))
 
     elif data_type.lower() == 'orderitem':
-        orderitems = OrderItemGenerator()
-        orderitems.generate_orderitem(int(data_num))
+        g_datas = OrderItemGenerator()
+        g_datas.generate_orderitem(int(data_num))
 
 
     my_printer = DataPrinter()

@@ -11,16 +11,22 @@ class OrderGenerator:
     def __init__(self):
         self.id_gen = IdGenerator()
         with open("store.csv",'r',encoding="utf-8") as file:
-            reader = csv.reader(file)
+            reader = csv.DictReader(file)
             for r in reader:
-                self.sid_lst.append(r[0])
+                self.sid_lst.append(r)
+            # reader = csv.reader(file)
+            # for r in reader:
+            #     self.sid_lst.append(r[0])
         with open("user.csv",'r',encoding="utf-8") as file:
-            reader = csv.reader(file)
+            reader = csv.DictReader(file)
             for r in reader:
-                self.uid_lst.append(r[0])
+                self.uid_lst.append(r)
+        #     reader = csv.reader(file)
+        #     for r in reader:
+        #         self.uid_lst.append(r[0])
         
-        del self.sid_lst[0]
-        del self.uid_lst[0]
+        # del self.sid_lst[0]
+        # del self.uid_lst[0]
         
 
     def generate_order(self, num):
@@ -40,7 +46,8 @@ class OrderGenerator:
             s_id = random.choice(self.sid_lst)
             u_id = random.choice(self.uid_lst)
 
-            self.data.append((oid, o_at, s_id, u_id))
+            self.data.append((oid, o_at, s_id['Id'], u_id['Id']))
+            # self.data.append((oid, o_at, s_id, u_id))
 
 
 
