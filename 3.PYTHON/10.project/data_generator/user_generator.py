@@ -1,7 +1,7 @@
 from generators.id_generator import IdGenerator
 from generators.user_name_generator import UnameGenerator
-from generators.birthdate_generator import BirthdateGenerator
-from generators.gender_generator import GenderGenerator
+from generators.user_birthdate_generator import BirthdateGenerator
+from generators.user_gender_generator import GenderGenerator
 from generators.address_generator import AddressGenerator
 
 
