@@ -10,14 +10,14 @@ class OrderItemGenerator:
 
     def __init__(self):
         self.id_gen = IdGenerator()
-        with open("order.csv",'r',encoding="utf-8") as file:
+        with open("csv/order.csv",'r',encoding="utf-8") as file:
             reader = csv.DictReader(file)
             for r in reader:
                 self.oid_lst.append(r)
             # reader = csv.reader(file)
             # for r in reader:
             #     self.oid_lst.append(r[0])
-        with open("item.csv",'r',encoding="utf-8") as file:
+        with open("csv/item.csv",'r',encoding="utf-8") as file:
             reader = csv.DictReader(file)
             for r in reader:
                 self.iid_lst.append(r)

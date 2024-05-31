@@ -14,6 +14,7 @@ class StoreGenerator:
         self.address_gen = AddressGenerator()
 
     def generate_store(self, num):
+        self.data = []
         self.data.append(('Id','Name','Type','Address'))
         for _ in range(num):
             sid = self.id_gen.generate_id()

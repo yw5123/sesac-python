@@ -4,7 +4,7 @@ class AddressGenerator:
     cities = []
 
     def __init__(self):
-        with open("address.txt",'r',encoding="utf-8") as file:
+        with open("txt/address.txt",'r',encoding="utf-8") as file:
             self.cities = file.read().splitlines()
 
     def generate_address(self):

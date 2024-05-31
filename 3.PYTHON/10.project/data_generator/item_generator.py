@@ -10,6 +10,7 @@ class ItemGenerator:
         self.name_gen = InameGenerator()
 
     def generate_item(self, num):
+        self.data = []
         self.data.append(('Id','Name','Type','UnitPrice'))
         for _ in range(num):
             iid = self.id_gen.generate_id()

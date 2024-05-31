@@ -16,7 +16,7 @@ class UserGenerator:
         self.address_gen = AddressGenerator()
 
     def generate_user(self, num):
-        # self.data = []
+        self.data = []
         self.data.append(('Id','Name','Gender','Age','Birthdate','Address'))
         for _ in range(num):
             uid = self.id_gen.generate_id()
