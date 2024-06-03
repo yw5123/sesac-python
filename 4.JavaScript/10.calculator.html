@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 계산기</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, lfr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .calculator button {
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator" align="center">
+        <input type="text" readonly>
+        <button>+</button>
+        <button>-</button>
+        <button>*</button>
+        <button>/</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>=</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>C</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>0</button>
+    </div>
+</body>
+</html>
