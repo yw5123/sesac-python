@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myElement" style="width: 100px; height: 2000px; background-color: lightblue;">여기요~~</div>
+    <script>
+        document.getElementById('myElement').addEventListener('mouseover', function() {
+            console.log('마우스가 위에 있음');
+        });
+
+        document.getElementById('myElement').addEventListener('mouseout', function() {
+            console.log('마우스가 나가 있음');
+        });
+
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // 이벤트의 기본 기능 동작 중단 -> 우클릭 안 됨
+            alert('우클릭이 금지되어 있습니다');
+            console.log('마우스 우클릭');
+        });
+
+        window.addEventListener('resize', function() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            console.log(`윈도우 크기가 변경되었습니다. 가로: ${width}, 세로: ${height}`);
+        });
+
+        window.addEventListener('scroll', function() {
+            // const scrollPosition = window.pageYOffset;  // 구현이 안 되어있는 브라우저도 있음.. 주의
+            // const scrollPosition = document.documentElement.scrollTop;
+
+            // 브라우저에 어느 기능이 있을지 모르니까 연산자를 이용해 여러 기능을 고려해 코딩할 수 있음
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+            console.log('페이지 스크롤됨. 세로 위치: ' + scrollPosition);  // 포멧팅 안 하고 이렇게도 작성 가능. 일관성만 지키면 됨!
+        });
+
+        window.addEventListener('wheel', function(event) {
+            console.log(`Mouse whell moved: ${event.deltaY}`)
+        })
+    </script>
+</body>
+</html>

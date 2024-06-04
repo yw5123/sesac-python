@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 계산기 3</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, lfr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .calculator button {
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator" align="center">
+        <input id="result" type="text" readonly>
+        <button onclick="appendSymbol(this.innerText)">+</button>
+        <button onclick="appendSymbol(this.innerText)">-</button>
+        <button onclick="appendSymbol(this.innerText)">*</button>
+        <button onclick="appendSymbol(this.innerText)">/</button>
+        <button onclick="appendNumber(this.innerText)">7</button>
+        <button onclick="appendNumber(this.innerText)">8</button>
+        <button onclick="appendNumber(this.innerText)">9</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendNumber(this.innerText)">4</button>
+        <button onclick="appendNumber(this.innerText)">5</button>
+        <button onclick="appendNumber(this.innerText)">6</button>
+        <button onclick="clearResult()">C</button>
+        <button onclick="appendNumber(this.innerText)">1</button>
+        <button onclick="appendNumber(this.innerText)">2</button>
+        <button onclick="appendNumber(this.innerText)">3</button>
+        <button onclick="appendNumber(this.innerText)">0</button>
+    </div>
+    <script>
+        function appendSymbol(symbol) {
+            // 입력된 부호가 중복이면? 재입력 안 하면 됨
+            input = document.getElementById('result');
+
+            if (checkError(input.value)) {
+                input.value = '';
+            }
+
+            // if (input.value[input.value.length - 1] != symbol) {
+            //     input.value += symbol;
+            // }
+
+            // lastInput = input.value.charAt(input.value.length - 1);
+            // lastInput = input.value.substring(input.value.length - 1);
+            lastInput = input.value.slice(-1);  // 다양하게 표현할 수 있음.
+            // if (lastInput !== symbol) {
+            //     input.value += symbol;
+            // }
+
+            // 다른 부호와도 겹치지 않아야 함..
+            // if (lastInput !== '+' && lastInput !== '-' && lastInput !== '*' && lastInput !== '/')   // 개선하려면?
+            // if (!isSymbol(lastInput)) {
+            //     input.value += symbol;
+            // }
+            
+            // 사용성을 위해 마지막 부호를 지우고 새로운 심볼을 추가 <- 도 고려 가능
+            // if (isSymbol(lastInput)) {
+            //     input.value = input.value.slice(0, -1);
+            // }
+            // input.value += symbol;
+            
+            // 한줄로 표현도 가능
+            isSymbol(lastInput) ? input.value = input.value.slice(0, -1) + symbol : input.value += symbol;
+        }
+        function isSymbol(symbol){
+            return ['+', '-', '*', '/'].includes(symbol)
+        }
+        function appendNumber(number) {
+            input = document.getElementById('result')
+            
+            if (checkError(input.value)) {
+                input.value = '';
+            }
+
+            input.value += number;
+        }
+        function checkError(input){
+            return input.slice(0,5) === "ERROR"
+        }
+        function clearResult() {
+            document.getElementById('result').value = '';
+        }
+        function calculate() {
+            // input = document.getElementById('result').value;
+            // result = eval(input);
+            // document.getElementById('result').value = result;
+
+            input = document.getElementById('result');
+            try {
+                result = eval(input.value);
+                // -정수를 0으로 나누는 경우 -Infinity가 됨
+                if (result == 'Infinity' || result == '-Infinity') {
+                    input.value = 'ERROR: Division by 0';
+                } else {
+                    input.value = result;
+                }
+            } catch(error) {
+                // console.log(error)  // 실무적으로는 배포할 때 이런 코드 남겨두지 않음!
+                // 연산자를 중복해서 입력하지 않게 하는 게 더 좋은 코딩
+                input.value = "ERROR";
+            }
+        }
+    </script>
+</body>
+</html>

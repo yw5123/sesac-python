@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 계산기 2</title>
+    <style>
+        .calculator {
+            display: grid;
+            grid-template-columns: repeat(4, lfr);
+            grid-gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .calculator button {
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator" align="center">
+        <input id="result" type="text" readonly>
+        <button onclick="document.getElementById('result').value += '+'">+</button>
+        <button onclick="document.getElementById('result').value += '-'">-</button>
+        <button onclick="document.getElementById('result').value += '*'">*</button>
+        <button onclick="document.getElementById('result').value += '/'">/</button>
+        <button onclick="document.getElementById('result').value += '7'">7</button>
+        <button onclick="document.getElementById('result').value += '8'">8</button>
+        <button onclick="document.getElementById('result').value += '9'">9</button>
+        <button>=</button>
+        <button onclick="document.getElementById('result').value += '4'">4</button>
+        <button onclick="document.getElementById('result').value += '5'">5</button>
+        <button onclick="document.getElementById('result').value += '6'">6</button>
+        <button onclick="document.getElementById('result').value = ''">C</button>
+        <button onclick="document.getElementById('result').value += '1'">1</button>
+        <button onclick="document.getElementById('result').value += '2'">2</button>
+        <button onclick="document.getElementById('result').value += '3'">3</button>
+        <button onclick="document.getElementById('result').value += '0'">0</button>
+    </div>
+</body>
+</html>
