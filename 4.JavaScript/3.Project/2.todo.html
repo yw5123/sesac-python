@@ -38,6 +38,9 @@
         #ulist button {
             margin-left: 30px;
         }
+        #ulist span {
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +62,8 @@
 
             const uList = document.getElementById('ulist');
             const newItem = document.createElement('li');
-            newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<button>삭제</button>';
+            // newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<button>삭제</button>';
+            newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<span>❌</span>';
             uList.appendChild(newItem);
 
             const chbox = newItem.getElementsByTagName('input')[0];
@@ -71,7 +75,8 @@
                 }
             });
 
-            const delbtn = newItem.getElementsByTagName('button')[0];
+            // const delbtn = newItem.getElementsByTagName('button')[0];
+            const delbtn = newItem.getElementsByTagName('span')[0];
             delbtn.addEventListener('click', function() {
                 this.parentNode.remove();
             });
