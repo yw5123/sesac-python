@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>귀여운 강아지</title>
+</head>
+<body>
+    <h1>귀여운 강아지를 보세요!</h1>
+    <!-- <button id="dog_button">다른 강아지</button><br> -->
+    <button onclick="changeImage()">다른 강아지</button><br>
+    <img id='dog_img' src="https://images.dog.ceo/breeds/elkhound-norwegian/n02091467_3131.jpg" alt="강아지 랜덤 이미지">
+</body>
+<script>
+    const dogElement = document.getElementById('dog_img');
+    // dogElement.setAttribute("src", "https:\/\/images.dog.ceo\/breeds\/greyhound-italian\/n02091032_4004.jpg")
+
+    // const requestDogImage() { }
+    const requestDogImage = async () => {
+        const response = await fetch("https://dog.ceo/api/breeds/image/random");
+        const jsonData = await response.json();
+
+        return jsonData.message;
+        // const dogElement = document.getElementById('dog_img');
+        // dogElement.setAttribute("src", jsonData.message);
+    }
+
+    const changeImage = async () => {
+        // requestDogImage();
+        const newDogImgae = await requestDogImage();
+        dogElement.setAttribute("src", newDogImgae);
+    }
+
+    // document.getElementById('dog_button').addEventListener('click', function() {
+    //     requestDogImage();
+    // });
+
+    function addElement(src) {
+        const img = document.createElement("img");
+        document.body.appendChild(img);
+        dom.setAttribute("src", src);
+    }
+</script>
+</html>
