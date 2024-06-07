@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type="number"] {
+            width: 50%;
+            height: 30px;
+            border: 3px solid black;
+            border-radius: 10px;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        button {
+            width: 70px;
+            height: 40px;
+            background-color:darkgreen;
+            color: whitesmoke;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+        <h1>사용자 검색 페이지</h1>
+        <input type="number" id="userId" placeholder="사용자 번호 입력">
+        <button onclick="searchUser()">검색</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function searchUser() {
+            const userId = document.getElementById('userId');
+
+            if (userId.value !== '') {
+                const url = 'https://jsonplaceholder.typicode.com/users/' + userId.value;
+
+                if (userId.value < 1 || userId.value >10) {
+                    alert('범위 밖의 번호입니다');
+                    displayUser("none");
+                    return
+                }
+
+                fetch(url)
+                .then(response => {         // 응답 받아서 확인
+                    if (!response.ok) {
+                        throw new Error('오류');
+                    }
+                    return response.json();
+                })
+                .then(function(user) {      // 데이터 처리
+                    displayUser(user);
+                }) 
+                .catch(function(error) {    // 처리하다가 오류 발생하면 오류 처리
+                    // console.log('오류 발생: ' + error);
+                })
+            }
+
+            userId.value = '';
+        }
+
+        function displayUser(user) {
+            // 어떻게 출력할지 처리하는 함수 구현
+            // 1. 결과 출력할 div 가져오기
+            // 2. 해당 div에 콘텐츠 채우기 (innerHTML 등등)
+            const resultDiv = document.getElementById('result');
+
+            if (user == "none") {
+                resultDiv.innerHTML = "";
+            } else {
+                resultDiv.innerHTML = 
+                    '<p><b>Name: </b>' + user.name + '</p>' +
+                    '<p><b>Email: </b>' + user.email + '</p>' +
+                    '<p><b>Phone: </b>' + user.phone + '</p>' +
+                    '<p><b>Website: </b>' + user.website + '</p>'
+            }
+
+        }
+    </script>
+</body>
+</html>

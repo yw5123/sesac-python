@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>로딩 from 외부 서버</h1>
+    <div id="contentContainer">
+        <!-- AJAX로 요청한 내용을 담을 공간 -->
+    </div>
+    <button id="loadButton">Load Content</button>
+    <script>
+        $(document).ready(function() {
+            $('#loadButton').click(function() {
+                // 버튼이 눌렸을 때 실행할 코드
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts/1',
+                    method: 'GET',
+                    success: function(data) {
+                        // 성공했을 때 - 요청에 대한 응답이 data에 담김
+                        $('#contentContainer').html(
+                            '<p>Title: ' + data.title + '</p>' +
+                            '<p>Body: ' + data.body + '</p>'
+                        )
+                    },
+                    error: function() {
+                        // 실패했을 때 수행할 동작
+                        console.error('알 수 없는 오류 발생');
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

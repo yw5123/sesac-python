@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>쇼핑 리스트</h1>
+    <ul id="shoppingList">
+        <li>Bread</li>
+        <li>Milk</li>
+        <li>Eggs</li>
+    </ul>
+    <input type="text" id="newItem" placeholder="추가할 상품 입력" />
+    <button id="addItem">상품 추가</button>
+
+    <script>
+        // DOM이 다 로딩될 때까지 기다린다
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     document.getElementById('addItem').addEventListener('click', function() {
+        //         const itemList = document.getElementById('shoppingList');
+        //         const itemText = document.getElementById('newItem');
+
+        //         if (itemText.value.trim() !== '') {
+        //             const newItem = document.createElement('li');
+        //             newItem.textContent = itemText.value;
+        //             itemList.appendChild(newItem);
+        //         }
+
+        //         itemText.value = "";
+        //     })
+        // });
+
+        // jQuery로 바꿔보기
+        $(document).ready(function() {
+            $('#addItem').click(function() {
+                const newItem = $('#newItem').val();
+
+                if (newItem !== ''){
+                    $('#shoppingList').append('<li>' + newItem + '</li>')
+                }
+
+                $('#newItem').val('');
+            })
+        });
+    </script>
+</body>
+</html>

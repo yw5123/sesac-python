@@ -41,6 +41,9 @@
         #ulist span {
             margin-left: 20px;
         }
+        #del-all {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +51,7 @@
         <h1>투두 리스트</h1>
         <input type="text" class="input" id="new-todo" placeholder="할 일을 입력하세요">
         <button type="button" class="button" id="add-todo"><b>추 가</b></button>
+        <br><button id="del-all">전체 삭제</button>
         <div>
             <ul id="ulist"></ul>
         </div>
@@ -62,8 +66,8 @@
 
             const uList = document.getElementById('ulist');
             const newItem = document.createElement('li');
-            // newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<button>삭제</button>';
-            newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<span>❌</span>';
+            newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<button>삭제</button>';
+            // newItem.innerHTML = '<input type="checkbox">' + newTodo.value + '<span>❌</span>';
             uList.appendChild(newItem);
 
             const chbox = newItem.getElementsByTagName('input')[0];
@@ -75,8 +79,8 @@
                 }
             });
 
-            // const delbtn = newItem.getElementsByTagName('button')[0];
-            const delbtn = newItem.getElementsByTagName('span')[0];
+            const delbtn = newItem.getElementsByTagName('button')[0];
+            // const delbtn = newItem.getElementsByTagName('span')[0];
             delbtn.addEventListener('click', function() {
                 this.parentNode.remove();
             });
@@ -84,6 +88,12 @@
             newTodo.value = "";
         });
 
+        document.getElementById('del-all').addEventListener('click', function() {
+            const uList = document.getElementById('ulist');
+            while(uList.firstChild) {
+                uList.removeChild(uList.firstChild);
+            }
+        });
     </script>
 </body>
 </html>

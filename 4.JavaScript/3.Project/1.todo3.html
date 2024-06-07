@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투두 리스트</title>
+    <!-- 숙제했던 코드에 수업시간에 진행된 리뷰 추가 -->
+    <style>
+        input[type="text"] {
+            width: 50%;
+            height: 30px;
+            border: 3px solid black;
+            border-radius: 10px;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        .button {
+            width: 70px;
+            height: 40px;
+            background-color:darkgreen;
+            color: whitesmoke;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+        #ulist {
+            list-style-type: none;
+            padding-left: none;
+            width: 60%;
+            text-align: left;
+        }
+        #ulist li {
+            margin: 15px 0px;
+            font-size: 20px;
+        }
+        #ulist input {
+            margin-right: 10px;
+        }
+        #ulist .delete-icon {
+            cursor: pointer;
+            color: red;
+            margin-left: 20px;
+        }
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+        <h1>투두 리스트</h1>
+        <input type="text" class="input" id="new-todo" placeholder="할 일을 입력하세요">
+        <button type="button" class="button" id="add-todo"><b>추 가</b></button>
+        <div>
+            <ul id="ulist"></ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('add-todo').addEventListener('click', function() {
+            let newTodo = document.getElementById('new-todo');
+            // newTodo = newTodo.trim();   // 앞뒤의 불필요한 공백 제거
+
+            // 빈 글자는 입력 불가
+            if (newTodo.value === "") return;
+
+            const uList = document.getElementById('ulist');
+
+            // 새로운 노드 만들기
+            const newItem = document.createElement('li');
+
+            // 체크박스 생성
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('change', function() {
+                newItem.classList.toggle('completed');
+            });
+            newItem.appendChild(checkbox);
+
+            // 텍스트 글자
+            const todoText = document.createElement('span');
+            todoText.textContent = newTodo.value;
+            newItem.appendChild(todoText);
+            
+
+            // 삭제 아이콘 추가
+            const deleteIcon = document.createElement('span');
+            deleteIcon.textContent = 'X'
+            deleteIcon.classList.add('delete-icon');
+            deleteIcon.addEventListener('click', function() {
+                newItem.remove();
+            })
+            newItem.appendChild(deleteIcon);
+
+
+            uList.appendChild(newItem);
+
+            newTodo.value = "";
+        });
+
+    </script>
+</body>
+</html>

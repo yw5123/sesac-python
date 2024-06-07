@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퍼즐 게임</title>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            grid-auto-rows: minmax(100px, auto);
+            max-width: 300px;
+            margin: 0 auto;
+            border: 3px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: darkseagreen;
+        }
+        .board div {
+            padding: 10px;
+            border: 3px solid black;
+            border-radius: 10px;
+            font-size: 18px;
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">퍼즐 게임</h1><hr><br>
+    <div class="board" align="center">
+        <div class="card row0 col0"></div>
+        <div class="card row0 col1"></div>
+        <div class="card row0 col2"></div>
+        <div class="card row1 col0"></div>
+        <div class="card row1 col1"></div>
+        <div class="card row1 col2"></div>
+        <div class="card row2 col0"></div>
+        <div class="card row2 col1"></div>
+        <div class="card row2 col2"></div>
+    </div>
+    <script>
+        function init() {
+            
+        }
+        init();
+        document.querySelectorAll('.card').forEach(function(card) {
+            card.addEventListener('click', function() {
+            });
+        });
+    </script>
+</body>
+</html>
