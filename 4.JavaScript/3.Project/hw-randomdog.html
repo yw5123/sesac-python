@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤강쥐</title>
+    <style>
+        #dogImg {
+            width: 300px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Random Dog Breen Image</h1>
+        <div>
+            <span>Choose a breed: </span> 
+            <select id="breed"></select>
+            <button id="breedBtn">Fetch Image</button>
+        </div><br><hr>
+        <img id="dogImg" />
+    </center>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('https://dog.ceo/api/breeds/list/all')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('패치 오류(종)');
+                    }
+                    return response.json();
+                })
+                .then(function(data) {
+                    // console.log(Object.keys(data.message));
+                    displayBreed(Object.keys(data.message));
+                })
+                .catch(function(error) {
+                    console.log('오류 발생: ' + error);
+                });
+
+            document.getElementById('breedBtn').addEventListener('click', function() {
+                const result = document.getElementById('breed').value;
+                const breedUrl = `https://dog.ceo/api/breed/${result}/images/random`;
+
+                fetch(breedUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('패치 오류(랜덤)');
+                        }
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        document.getElementById('dogImg').src = data.message;
+                    })
+                    .catch(function(error) {
+                        console.log('오류 발생: ')
+                    })
+            })
+        })
+
+        function displayBreed(breed) {
+            const selectList = document.getElementById('breed');
+            for(let i = 0; i < breed.length; i++) {
+                const newList = document.createElement('option');
+                newList.value = breed[i];
+                newList.textContent = breed[i];
+                selectList.appendChild(newList);
+            }
+        }
+    </script>
+</body>
+</html>

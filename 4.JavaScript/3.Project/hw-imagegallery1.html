@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 갤러리</title>
+    <style>
+        .header button {
+            width: 130px;
+            background-color: darkgreen;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin-left: 70px;
+            margin-right: 70px;
+            color: lightgreen;
+            font-size: 15px;
+        }
+        .gallery img {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <center class="header">
+        <h1>이미지 갤러리</h1> 
+        <button id="prev"> <<  previous </button>
+        <button id="next"> next  >> </button>
+        <hr> <br>
+    </center>
+
+    <center class="gallery">
+        <img id="image" src="tiger1.webp">
+    </center>
+
+    <script>
+        const imgLst = ["tiger1.webp", "tiger2.jpg", "tiger3.webp"];
+        const img = document.getElementById('image');
+        let img_index = 0;
+
+        document.getElementById('next').addEventListener('click', function() {
+
+            if(img_index == imgLst.length - 1) {
+                img_index = 0;
+            } else {
+                img_index++;
+            }
+
+            img.src = imgLst[img_index];
+        })
+
+        document.getElementById('prev').addEventListener('click', function() {
+
+            if(img_index == 0) {
+                img_index = imgLst.length - 1;
+            } else {
+                img_index--;
+            }
+
+            img.src = imgLst[img_index];
+        })
+    </script>
+</body>
+</html>
