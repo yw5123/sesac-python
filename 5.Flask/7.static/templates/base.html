@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div>
+        <h1>나의 베이스 헤딩</h1>
+    </div>
+    <div>
+        {% block menu %}
+        <!-- 동적으로 변경하고 싶은 페이지 내용 -->
+        {% endblock %}
+
+        {% block content %}
+        <!-- 동적으로 변경하고 싶은 페이지 내용 -->
+        {% endblock %}
+    </div>
+</body>
+</html>

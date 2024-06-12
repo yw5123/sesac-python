@@ -23,7 +23,6 @@ def load_csv_data(filename):
 def index(page=1):
     per_page = 10   # 한 페이지에 보여줄 항목 수
 
-    # totalpages = (len(csv_data) - 1) // 10 if (len(csv_data) - 1) % 10 == 0 else (len(csv_data) - 1) // 10 + 1
     totalpages = math.ceil(len(csv_data) / per_page)
     if page > totalpages:
         page = totalpages
@@ -32,11 +31,20 @@ def index(page=1):
     end_index = page * per_page + 1
     users = csv_data[start_index:end_index]
 
-    return render_template("index2.html", header=headers, users=users, page=page, totalpages=totalpages)
+    return render_template("index3.html", headers=headers, users=users, page=page, totalpages=totalpages)
+
+
+@app.route('/user/<uuid>')
+def user_detail(uuid):
+    user = []
+    for u in csv_data:
+        if u.get('Id') == uuid:
+            user = u
+    return render_template("user_detail.html", headers=headers, user=user)
 
 
 if __name__ == "__main__":
-    load_csv_data('./data.csv')
+    load_csv_data('./user.csv')
     app.run(debug=True)
 
 # 1. 이 파일에 flask 기본 툴 추가
