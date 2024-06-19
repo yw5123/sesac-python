@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}POST PAGE{% endblock %}
+
+{% block content %}
+<H1>Post Page</H1>
+{% if 'user' in session %}
+    <form method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+        <br>
+        <label for="content">Content:</label>
+        <textarea name="content" cols="40" rows="8"required></textarea>
+        <br>
+        <button type="submit">Add Post</button>
+    </form>
+{% endif %}
+
+<H2>Post List</H2>
+{% if posts %} 
+    <table border="1" width="400">
+        <tr>
+            <th>Title</th>
+            <th>ID</th>
+        </tr>
+        {% for post in posts %}
+            <tr align="center">
+                <td>{{ post.title }}</td>
+                <td>{{ post.username }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>아직 게시글이 없습니다.</p>
+{% endif %}
+
+
+{% if 'user' in session %}
+<H2>My Post</H2>
+    {% if myposts %}
+    <ul>
+    {% for post in myposts %}
+        <li>{{ post.title }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>작성한 게시글이 없습니다.</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

@@ -6,14 +6,15 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('home') }}">HOME</a>
+        <a href="{{ url_for('home') }}">[ HOME ]</a>
+        <a href="{{ url_for('view') }}">[ VIEW ]</a>
+        <a href="{{ url_for('post') }}">[ POST ]</a>
         {% if 'user' in session %}
-        <a href="{{ url_for('logout') }}">LOGOUT</a>
-        <a href="{{ url_for('user') }}">USER</a>
+            <a href="{{ url_for('user') }}">[ PROFILE ]</a>
+            <a href="{{ url_for('logout') }}">[ LOGOUT ]</a>
         {% else %}
-        <a href="{{ url_for('login') }}">LOGIN</a>
+            <a href="{{ url_for('login') }}">[ LOGIN ]</a>
         {% endif %}
-        <a href="{{ url_for('view') }}">VIEW</a>
     </nav>
     <div>
         {% block content %}{% endblock %}
