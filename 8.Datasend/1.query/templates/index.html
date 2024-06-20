@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        document.getElementById('myForm').addEventListener('submit', sendData);
+        function sendData() {
+            event.preventDefault(); // 폼의 본연의 기능 비활성화
+
+            const data = {
+                name: document.getElementById('name').value,
+                age: document.getElementById('age').value
+            }
+
+            // console.log('이름: ' + name + ", 나이: " + age);
+
+            fetch('/user_json', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+        }
+    </script>
+</head>
+<body>
+    <h1>쿼리 파라미터(GET)를 통한 데이터 전달</h1>
+    <form action="/user" method="get">
+        <input type="text" name="name" placeholder="이름">
+        <input type="number" name="age" placeholder="나이">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h1>폼 파라미터(POST)를 통한 데이터 전달</h1>
+    <form action="/user" method="post">
+        <input type="text" name="name" placeholder="이름">
+        <input type="number" name="age" placeholder="나이">
+        <input type="submit" value="Submit">
+    </form>
+
+    <h1>폼을 JS를 통해 전달하는 방식</h1>
+    <form action="/user" method="post" id="myForm">
+        <input type="text" id="name" name="name" placeholder="이름">
+        <input type="number" id="age" name="age" placeholder="나이">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
