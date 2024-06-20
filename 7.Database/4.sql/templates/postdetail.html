@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}POST PAGE{% endblock %}
+
+{% block content %}
+
+<H1>Show Post</H1>
+<H2>{{ post.title }}</H2>
+<H4>작성자: {{ post.username }}</H3>
+<p>{{ post.content }}</p>
+
+{% if "user" in session and session['user'] == post.username %}
+<form action="#" method="POST">
+    <input type="submit" name="action" value="Edit Post">
+    <input type="submit" name="action" value="Delete Post">
+</form>
+{% endif %}
+
+{% endblock %}

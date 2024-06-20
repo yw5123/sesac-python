@@ -25,7 +25,7 @@
         </tr>
         {% for post in posts %}
             <tr align="center">
-                <td>{{ post.title }}</td>
+                <td><a href="{{ url_for('show_post', post_id=post.id) }}">{{ post.title }}</a></td>
                 <td>{{ post.username }}</td>
             </tr>
         {% endfor %}
@@ -40,7 +40,7 @@
     {% if myposts %}
     <ul>
     {% for post in myposts %}
-        <li>{{ post.title }}</li>
+        <li><a href="{{ url_for('show_post', post_id=post.id) }}">{{ post.title }}</a></li>
     {% endfor %}
     </ul>
     {% else %}

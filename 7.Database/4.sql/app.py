@@ -138,7 +138,7 @@ def join():
     return render_template('join.html')
 
 @app.route('/post', methods=['GET', 'POST'])
-def post():
+def post(post_id=None):
     my_post_list = None
 
     if request.method == 'POST':
@@ -151,15 +151,31 @@ def post():
             query = "INSERT INTO posts (title, content, user_id) VALUES (?, ?, ?)"
             db.execute_query(query, (title, content, userid))
     
-    query = "SELECT p.title as title, u.username as username FROM posts p INNER JOIN users u WHERE p.user_id = u.id"
+    query = '''SELECT p.id AS id, p.title AS title, u.username AS username 
+            FROM posts p INNER JOIN users u WHERE p.user_id = u.id'''
     post_list = db.get_query(query)
 
     if "user" in session:
         userid = session['userid']
-        query = "SELECT title FROM posts WHERE user_id = ?"
+        query = "SELECT id, title FROM posts WHERE user_id = ?"
         my_post_list = db.get_query(query, (userid,))
 
     return render_template('post.html', posts=post_list, myposts=my_post_list)
+
+@app.route('/post/<int:post_id>', methods=['GET', 'POST'])
+def show_post(post_id):
+    if request.method == 'POST':
+        action = request.form.get('action', None)
+        if action == "Delete Post":
+            query = "DELETE FROM posts WHERE id = ?"
+            db.execute_query(query, (post_id,))
+            print('게시글 삭제')
+            flash('게시글이 삭제되었습니다')
+            return redirect(url_for('post'))
+    query = '''SELECT p.id AS id, p.title AS title, p.content AS content, u.username AS username
+            FROM posts p INNER JOIN users u WHERE p.id = ? and p.user_id = u.id'''
+    post_detail = db.get_query(query, (post_id,))[0]
+    return render_template('postdetail.html', post=post_detail)
 
 if __name__ == "__main__":
     db.init_db()
