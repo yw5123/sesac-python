@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}POST PAGE{% endblock %}
+
+{% block content %}
+
+{% if post %}
+<H1>Edit Post</H1>
+{% else %}
+<H1>New Post</H1>
+{% endif %}
+
+{% if 'user' in session %}
+    <form method="POST">
+        <label for="title">Title:</label>
+        <input type="text" name="title" value="{{ post.title if post }}" required>
+        <br>
+        <label for="content">Content:</label>
+        <textarea name="content" cols="40" rows="8" value="{{ post.content if post }}" required></textarea>
+        <br>
+        {% if post %}
+        <button type="submit">수정</button>
+        {% else %}
+        <button type="submit">작성</button>
+        {% endif %}
+    </form>
+{% endif %}
+
+
+{% endblock %}

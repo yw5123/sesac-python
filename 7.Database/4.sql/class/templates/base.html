@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">HOME</a>
+        {% if 'user' in session %}
+        <a href="{{ url_for('logout') }}">LOGOUT</a>
+        <a href="{{ url_for('user') }}">USER</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">LOGIN</a>
+        {% endif %}
+        <a href="{{ url_for('view') }}">VIEW</a>
+    </nav>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

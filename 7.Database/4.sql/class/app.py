@@ -17,7 +17,7 @@ def login():
         # 로그인 처리 구현
         username = request.form['username']
         password = request.form['password']
-        
+
         # 사용자 데이터를 외부 db에서 가져오기
         query = "SELECT * FROM users WHERE username = ? AND password = ?"
         user_data = db.get_query(query, (username, password))
@@ -33,7 +33,6 @@ def login():
         # if user_data and user_data['password'] == password:
         if len(user_data) == 1:
             session['user'] = user_data[0]['username']
-            session['userid'] = user_data[0]['id']
             if "email" in user_data[0]:
                 session['email'] = user_data[0]['email']
             session.permanent = True
@@ -67,34 +66,26 @@ def user():
             #     email = request.form["email"]
 
             new_email = request.form.get('email', None)
+            session['email'] = new_email
             new_password = request.form.get('password', None)
-            
             if new_email:
-                try:
-                    query = "UPDATE users SET email = ? WHERE username = ?"
-                    db.execute_query(query, (new_email, username))
-                except:
-                    flash('이미 등록된 이메일입니다')
-                    return redirect(url_for('user'))
-                session['email'] = new_email
+                query = "UPDATE users SET email = ? WHERE username = ?"
+                db.execute_query(query, (new_email, username))
                 email = new_email
 
             if new_password:
                 query = "UPDATE users SET password = ? WHERE username = ?"
                 db.execute_query(query, (new_password, username))
 
-            if new_email or new_password:
-                print('사용자 정보 업데이트')
-                flash('사용자 정보가 업데이트되었습니다')
+            print('사용자 정보 업데이트')
+            flash('사용자 정보가 업데이트되었습니다')
 
-            delete = request.form.get('delete', None)
-            if delete == "submit":
             # if not new_email and not new_password:
-                query = "DELETE FROM users WHERE username = ?"
-                db.execute_query(query, (username,))
-                print('계정 삭제')
-                flash('계정이 삭제되었습니다')
-                return redirect(url_for('logout'))
+            #     query = "DELETE FROM users WHERE username = ?"
+            #     db.execute_query(query, (username,))
+            #     print('계정 삭제')
+            #     flash('계정이 삭제되었습니다')
+            #     return redirect(url_for('logout'))
 
         return render_template('user.html', email=email)
     
@@ -112,10 +103,9 @@ def view():
 def logout():
     session.pop('user', None)
     session.pop('email', None)
-    session.pop('userid', None)
     print('로그아웃')
     flash('로그아웃에 성공하였습니다')
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 @app.route('/join', methods=['GET', 'POST'])
 def join():
@@ -124,58 +114,14 @@ def join():
         username = request.form['username']
         password = request.form['password']
 
-        try:
-            query = "INSERT INTO users (username, password) VALUES (?, ?)"
-            db.execute_query(query, (username, password))
-            print('회원가입 완료')
-            flash('회원가입이 완료되었습니다')
-            return redirect(url_for('home'))
-        except:
-            flash('이미 있는 username입니다')
-            return redirect(url_for('join'))
-
+        query = "INSERT INTO users (username, password) VALUES (?, ?)"
+        db.execute_query(query, (username, password))
+        print('회원가입 완료')
+        flash('회원가입이 완료되었습니다')
+        return redirect(url_for('home'))
+        
     # GET 요청 시 회원가입 폼 보여주기
     return render_template('join.html')
-
-@app.route('/post', methods=['GET', 'POST'])
-def post(post_id=None):
-    my_post_list = None
-
-    if request.method == 'POST':
-        if "user" in session:
-            userid = session['userid']
-            title = request.form['title']
-            content = request.form['content']
-            
-            # INSERT INTO users (username, password) VALUES (?, ?)
-            query = "INSERT INTO posts (title, content, user_id) VALUES (?, ?, ?)"
-            db.execute_query(query, (title, content, userid))
-    
-    query = '''SELECT p.id AS id, p.title AS title, u.username AS username 
-            FROM posts p INNER JOIN users u WHERE p.user_id = u.id'''
-    post_list = db.get_query(query)
-
-    if "user" in session:
-        userid = session['userid']
-        query = "SELECT id, title FROM posts WHERE user_id = ?"
-        my_post_list = db.get_query(query, (userid,))
-
-    return render_template('post.html', posts=post_list, myposts=my_post_list)
-
-@app.route('/post/<int:post_id>', methods=['GET', 'POST'])
-def show_post(post_id):
-    if request.method == 'POST':
-        action = request.form.get('action', None)
-        if action == "Delete Post":
-            query = "DELETE FROM posts WHERE id = ?"
-            db.execute_query(query, (post_id,))
-            print('게시글 삭제')
-            flash('게시글이 삭제되었습니다')
-            return redirect(url_for('post'))
-    query = '''SELECT p.id AS id, p.title AS title, p.content AS content, u.username AS username
-            FROM posts p INNER JOIN users u WHERE p.id = ? and p.user_id = u.id'''
-    post_detail = db.get_query(query, (post_id,))[0]
-    return render_template('postdetail.html', post=post_detail)
 
 if __name__ == "__main__":
     db.init_db()

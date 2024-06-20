@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}VIEW PAGE{% endblock %}
+
+{% block content %}
+<H1>View Page</H1>
+
+{% if users %}
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>PW</th>
+        <th>E-MAIL</th>
+    </tr>
+    {% for user in users %}
+    <tr align="center">
+        <td>{{ user.username }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}
