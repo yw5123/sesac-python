@@ -126,7 +126,7 @@ def userpage():
 
         query = '''SELECT p.id AS id, p.title AS title 
                 FROM posts p INNER JOIN users u
-                WHERE p.user_id = u.id  and u.username = ?'''
+                ON p.user_id = u.id  WHERE u.username = ?'''
         my_post_list = db.get_query(query, (username,))
 
         return render_template('userpage.html', myposts=my_post_list)
@@ -141,7 +141,7 @@ def postlist():
         if 'user' in session:
             return redirect(url_for('edit_post'))
     query = '''SELECT p.id AS id, p.title AS title, u.username AS username 
-            FROM posts p INNER JOIN users u WHERE p.user_id = u.id'''
+            FROM posts p INNER JOIN users u ON p.user_id = u.id'''
     post_list = db.get_query(query)
 
     return render_template('postlist.html', posts=post_list)
@@ -164,7 +164,7 @@ def post(post_id, prev=None):
             return redirect(url_for('edit_post', post_id=post_id, prev=prev))
     
     query = '''SELECT p.id AS id, p.title AS title, p.content AS content, u.username AS username
-            FROM posts p INNER JOIN users u WHERE p.id = ? and p.user_id = u.id'''
+            FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?'''
     post_content = db.get_query(query, (post_id,))[0]
 
     return render_template('post.html', post=post_content)
@@ -176,7 +176,7 @@ def edit_post(post_id=None, prev=None):
     if 'user' in session:
         if post_id:
             query = '''SELECT p.id AS id, p.title AS title, p.content AS content, u.username AS username
-            FROM posts p INNER JOIN users u WHERE p.id = ? and p.user_id = u.id'''
+            FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?'''
             post_content = db.get_query(query, (post_id,))[0]
         else:
             post_content = None
