@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}POST PAGE{% endblock %}
+
+{% block content %}
+<H1>Post Page</H1>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p style="color: darkolivegreen">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% if 'user' in session %}
+<div><form method="POST">
+    <button type="submit">New Post</button>
+</form><br></div>
+{% endif %}
+
+{% if posts %} 
+    <table border="1" width="400">
+        <tr>
+            <th>Title</th>
+            <th>ID</th>
+        </tr>
+        {% for post in posts %}
+            <tr align="center">
+                <td><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></td>
+                <td>{{ post.username }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>아직 게시글이 없습니다.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">[ Main Page ]</a>
+        <a href="{{ url_for('userlist') }}">[ User List ]</a>
+        <a href="{{ url_for('postlist') }}">[ Post Page ]</a>
+        {% if 'user' in session %}
+            <a href="{{ url_for('userpage') }}">[ PROFILE ]</a>
+            <a href="{{ url_for('logout') }}">[ LOGOUT ]</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">[ LOGIN ]</a>
+        {% endif %}
+    </nav>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
