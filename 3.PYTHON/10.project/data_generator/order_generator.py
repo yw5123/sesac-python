@@ -41,7 +41,7 @@ class OrderGenerator:
                 day = random.randint(1,30)
             else:
                 day = random.randint(1,31)
-            o_at = f"2023-{month:02d}-{day:02d} 2023-{random.randint(0,23):02d}-{random.randint(0,59):02d}"
+            o_at = f"2023-{month:02d}-{day:02d} {random.randint(0,23):02d}:{random.randint(0,59):02d}:{random.randint(0,59):02d}"
 
             s_id = random.choice(self.sid_lst)
             u_id = random.choice(self.uid_lst)
