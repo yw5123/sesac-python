@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="barChart" width="400" height="200"></canvas>
+
+    <script>
+        const ctx = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [
+                    {
+                        label: 'Data',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple', 'orage']
+                    }
+                ], 
+            },
+            options: {},
+        });
+    </script>
+</body>
+</html>

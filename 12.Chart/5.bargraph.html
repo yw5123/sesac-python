@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bargraph" width="400" height="200"></canvas>
+
+    <script>
+        const canvas = document.getElementById('bargraph');
+        const context = canvas.getContext('2d');
+
+        // 예제 데이터
+        const graphData = {
+            A: 10, B: 20, C:40, D: 60, E: 80
+        }
+
+        function drawBarGraph(data) {
+            context.clearRect(0, 0, canvas.width, canvas.height)   // 화면 초기화 - 불필요함
+
+            // 바 그래프 그리기 위한 기본 값
+            const barWidth = 30;
+            let startX = 20;
+
+            for (const key in data) {
+                const barHeight = data[key];
+                context.fillStyle = 'blue';
+                context.fillRect(startX, canvas.height - barHeight - 20, barWidth, barHeight);
+
+                // x축에 텍스트 쓰기
+                context.fillStyle = 'red';
+                context.fillText(key, startX + barWidth / 2, canvas.height - 5);
+
+                startX += 50;
+            }
+        }
+
+        drawBarGraph(graphData)
+    </script>
+</body>
+</html>

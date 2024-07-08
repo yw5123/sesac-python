@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="400" height="200"></canvas>
+
+    <script>
+        const canvas = document.getElementById('mycanvas');
+        const context = canvas.getContext('2d');
+
+        let x = 40;
+        let y = 40;
+        let speed = 3
+        let xchange = speed;
+        let ychange = speed;
+        const radius = 20;
+
+        function drawBall() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            context.beginPath();
+            context.arc(x, y, 20, 0, Math.PI * 2);
+            context.fillStyle = 'purple';
+            context.fill();
+            context.closePath();
+
+            // 적절한 변수 이용해서 공 이동
+            x += xchange;
+            y += ychange;
+    
+            // 조건에 따라 튕기게
+            // if (x > canvas.width - radius) {
+            //     xchange = -speed;
+            // }
+            // if (x < radius) {
+            //     xchange = +speed;
+            // }
+            // if (y > canvas.height - radius) {
+            //     ychange = -speed;
+            // }
+            // if (y < radius) {
+            //     ychange = +speed;
+            // }
+
+            // 더 간략하게
+            if (x > canvas.width - radius || x < radius) {
+                xchange *= -1;  // xchange = -xchange;
+            }
+            if (y > canvas.height - radius || y < radius) {
+                ychange *= -1;  // ychange = -ychange;
+            }
+            
+            requestAnimationFrame(drawBall);
+        }
+
+        drawBall();
+    </script>
+</body>
+</html>
