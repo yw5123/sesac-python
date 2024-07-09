@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+        </style>
+</head>
+<body>
+    <p><a href="https://www.flaticon.com/kr/free-icons/" title="우주선 아이콘">우주선 아이콘 제작자: photo3idea_studio - Flaticon</a></p>
+    <canvas id="mycanvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('mycanvas')
+        const ctx = canvas.getContext('2d');
+
+        const player = {
+            x: 0,  // 하드코딩... XXX 비추...
+            y: 0,
+            speed: 2,
+            directionX: 0
+        };
+
+        const meteor = {
+            x: 200, 
+            y: 0, 
+            speed: 2
+        }
+        
+
+        const image = new Image();
+        image.src = 'ship.png';
+
+        image.onload = function() {
+            player.x = (canvas.width - image.width) / 2;
+            player.y = (canvas.height - image.height);
+            console.log(player.x, player.y);
+            draw();
+        }
+
+        const meteorImage = new Image();
+        meteorImage.src = 'meteor.png';
+        meteorImage.onload = function() {
+            draw();
+        }
+
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, player.x, player.y);
+            ctx.drawImage(meteorImage, meteor.x, meteor.y);
+
+            // 위치 업데이트
+            player.x += player.speed * player.directionX;
+
+            // 운석 위치 업데이트.... 운석이 아래로 이동하기... 한줄짜리 코드임
+            meteor.y += meteor.speed;
+
+            if (meteor.y > canvas.height) {
+                meteor.y = 0;
+                meteor.x = Math.round(Math.random() * (canvas.width - meteorImage.width));
+            }
+
+            // // 충돌 로직 구현하기
+            // if ((meteor.x > player.x) && (meteor.x > player.x - image.width) && (meteor.y < player.y - image.height) && (meteor.y > player.y)) {
+            //     console.log('충돌!!!')
+            // }
+
+            if ((meteor.x < player.x + image.width) && 
+                (meteor.x + meteorImage.width > player.x) &&
+                (meteor.y < player.y + image.height) && 
+                (meteor.y + meteorImage.height > player.y)) {
+                console.log('충돌!!!');
+            }
+            
+            // console.log(meteor.x, meteor.y, player.x, player.y);
+
+            // 위치를 바운더리 밖으로 나가지 못하도록 고정하기...
+            if (player.x < 0) {
+                player.x = 0;
+            }
+
+            if (player.x > canvas.width - image.width) {
+                player.x = canvas.width - image.width;
+            }
+
+            requestAnimationFrame(draw); // 재귀함수 : requestAni가 나 스스로를 또 
+        }
+
+        // 키보드 이벤트 추가
+        window.addEventListener('keydown', (e) => {
+            // console.log(e)
+            switch(e.key) {
+                case 'ArrowLeft':
+                    player.directionX = -1;
+                    break;
+                case 'ArrowRight':
+                    player.directionX = +1;
+                    break;
+            }
+        })
+    </script>
+</body>
+</html>

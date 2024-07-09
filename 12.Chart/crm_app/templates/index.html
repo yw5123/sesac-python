@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+
+    <script>
+        // 그래프에 들어갈 데이터 - 백엔드에 요청해서 받아와야함
+        // var labels = ['2023-01', '2023-02', '2023-03', '2023-04']
+        // var revenue = [797500, 401500, 665500, 660000]
+
+        async function fetchData() {
+            const response = await fetch('/data');    // 백엔드에 요청항 url 주소
+            const data = await response.json();       // 백엔드에서 json으로 준다고 가정
+            return data;
+        }
+
+        async function drawChart() {
+            const revenue = await fetchData();
+
+            const data = {
+                labels: revenue.labels,
+                datasets: [
+                    {
+                        label: '월간 매출액',
+                        data: revenue.revenues,
+                        backgroundColor: 'rgb(255, 99, 132, 0.2)',   // 막대 색상 투명도 20%
+                        borderColor: 'rgb(255, 99,132, 1)',      // 투명도 0% (1.0 = 불투명)
+                        borderWidth: 2
+                    }
+                ]
+            };
+
+            // chart.js의 그래프 설정값들
+            const config = {
+                type: 'line',    // 차트 유형
+                data: data,     // 차트 데이터
+                options: {
+                    scales: {
+                        y: {
+                            beginATZero: true,
+                            title: {
+                                display: true,
+                                text: '매출액'
+                            }
+                        }
+                    }
+                }
+            };
+
+            // 그래프 그리기
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, config);
+        }
+
+        window.onload = drawChart;  // 페이지 로딩이 끝났을 때 함수 호출
+    </script>
+</body>
+</html>
