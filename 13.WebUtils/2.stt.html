@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <H1>STT (Speech-to-Text)</H1>
+    <button onclick="startRecognition()">녹음 시작</button>
+
+    <script>
+        function startRecognition() {
+            // const recognition = new window.SpeechRecognition();
+            // const recognition = new window.webkitSpeechRecognition();
+            const recognition = new (window.speechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'ko-KR';
+
+            // 음성 인식이 되었을 때 호출될 콜백 함수 등록
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                console.log('분석된 내용: ', transcript);
+            }
+
+            // 오류 발생 시 호출될 콜백 함수 등록
+            recognition.onerror = function(event) {
+                console.error(event.error); // 오류가 나면 출력 - 지금은 굳이 그럴 상황은 없음
+            }
+
+            // 시작 함수 호출
+            recognition.start();
+        }
+    </script>
+</body>
+</html>
