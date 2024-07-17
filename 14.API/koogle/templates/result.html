@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koogle 검색 겨로가</title>
+</head>
+<body>
+    <h1>검색 결과: "{{ query }}"</h1>
+    <a href="/">다시 검색</a>
+    <br>
+    {% for item in results['documents'] %}
+    <div>
+        <h3>{{ item['title'] | safe }}</h3>
+        <p>{{ item['contents'] | safe }}</p>
+        <a href="{{ item['url'] }}">{{ item['url'] }}</a>
+    </div>
+    {% endfor %}
+</body>
+</html>
